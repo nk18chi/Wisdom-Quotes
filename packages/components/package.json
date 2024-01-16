@@ -1,0 +1,62 @@
+{
+  "name": "@nk18chi/components",
+  "version": "0.0.1",
+  "description": "> TODO: description",
+  "author": "Naoki Mita <naoki.mita18@gmail.com>",
+  "homepage": "https://github.com/nk18chi/lerna-playground#readme",
+  "license": "ISC",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/types/index.d.ts",
+  "directories": {
+    "dist": "dist"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "node ./__tests__/components.test.js",
+    "build": "rollup -c",
+    "dev": "rollup -c -w & npm run storybook",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "bugs": {
+    "url": "https://github.com/nk18chi/lerna-playground/issues"
+  },
+  "dependencies": {
+    "@types/react": "^18.2.46",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.3.3"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.6",
+    "@babel/preset-react": "^7.23.3",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-replace": "^5.0.5",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@storybook/addon-essentials": "^7.6.6",
+    "@storybook/addon-interactions": "^7.6.6",
+    "@storybook/addon-links": "^7.6.6",
+    "@storybook/addon-onboarding": "^1.0.10",
+    "@storybook/blocks": "^7.6.6",
+    "@storybook/react": "^7.6.6",
+    "@storybook/react-vite": "^7.6.6",
+    "@storybook/test": "^7.6.6",
+    "@types/react-dom": "^18.2.18",
+    "rollup": "^4.9.1",
+    "storybook": "^7.6.6"
+  },
+  "repository": {
+    "url": "https://github.com/nk18chi/lerna-playground.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  }
+}

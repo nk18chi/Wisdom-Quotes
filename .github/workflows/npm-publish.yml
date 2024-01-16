@@ -1,0 +1,36 @@
+name: Publish NPM Packages
+
+run-name: Publish NPM Packages for ${{ github.sha }}
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [closed]
+
+jobs:
+  npm-publish:
+    name: Publish NPM Packages
+    runs-on: ubuntu-latest
+
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    if: github.event.pull_request.merged == true
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Generate .npmrc
+        run: |
+          echo @nk18chi:registry=https://npm.pkg.github.com/ >> .npmrc
+          echo //npm.pkg.github.com/:_authToken=${LERNA_PLAYGROUND_PACKAGE_TOKEN} >> .npmrc
+        env:
+          LERNA_PLAYGROUND_PACKAGE_TOKEN: ${{ secrets.LERNA_PLAYGROUND_PACKAGE_TOKEN }}
+      - name: Publish packages with Lerna
+        run: |
+          npx lerna publish from-package --yes

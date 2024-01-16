@@ -1,0 +1,60 @@
+name: Create Release Pull Request
+
+run-name: Create release PR for ${{ github.sha }}
+
+on:
+  pull_request:
+    branches:
+      - dev
+    types: [closed]
+
+jobs:
+  create-release-pr:
+    name: Create release PR
+
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    if: github.event.pull_request.merged == true
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: NPM Install
+        run: npm install
+
+      - name: Create a new commit to bump version
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          npx lerna version
+      - name: Create a release branch with pushing it to the remote
+        run: |
+          LAST_COMMIT_SHORT_ID=$(git rev-parse --short HEAD)
+          git checkout -b release/$LAST_COMMIT_SHORT_ID
+          git push origin release/$LAST_COMMIT_SHORT_ID
+          echo "last_commit_short_id=$LAST_COMMIT_SHORT_ID" >> $GITHUB_ENV
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create a release pull request for main branch
+        run: |
+          gh pr create \
+            --title "Release PR for ${{ env.last_commit_short_id }}" \
+            --body "${{ github.event.head_commit.message }}" \
+            --base main \
+            --head release/${{ env.last_commit_short_id }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Authenticate cli with a PAT
+        run: echo "${{ secrets.DEPENDABOT_TOKEN }}" | gh auth login --with-token
+      - name: Enable auto-merge
+        run: gh pr merge release/${{ env.last_commit_short_id }} --merge --auto

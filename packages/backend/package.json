@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "@nk18chi/backend",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -65,5 +65,11 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "repository": {
+    "url": "https://github.com/nk18chi/lerna-playground.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   }
 }

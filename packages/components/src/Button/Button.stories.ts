@@ -17,5 +17,7 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     label: "Click Now!",
+    variant: "contained",
+    color: "primary",
   },
 };

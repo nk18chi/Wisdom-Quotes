@@ -42,6 +42,8 @@ npm install lerna -g
 git clone git@github.com:nk18chi/lerna-mern-stack-boilerplate.git
 npm install
 lerna run dev
+
+Please replace @nk18chi with your github account in an entire repository
 ```
 
 ## Development
@@ -56,6 +58,7 @@ backend: http://localhost:4000/
 ```
 
 ## Add a New Package
+
 ```
 lerna create ${packageName}
 ```

@@ -15,5 +15,10 @@
     "forceConsistentCasingInFileNames": true,
     "types": ["@testing-library/jest-dom"]
   },
-  "exclude": ["dist", "node_modules", "src/**/*.test.tsx", "src/**/*.stories.tsx"]
+  "exclude": [
+    "dist",
+    "node_modules",
+    "src/**/*.test.tsx",
+    "src/**/*.stories.tsx"
+  ]
 }

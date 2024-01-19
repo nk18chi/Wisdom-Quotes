@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { Button } from "@nk18chi/components";
+import { Button } from '@nk18chi/components';
 
 interface HeroProps {
   title: string;
@@ -9,7 +9,7 @@ interface HeroProps {
 const Hero = ({ title }: HeroProps) => (
   <>
     <h1>{title}</h1>
-    <Button label='Click Now' variant='contained' color='primary' />
+    <Button label="Click Now" variant="contained" color="primary" />
   </>
 );
 

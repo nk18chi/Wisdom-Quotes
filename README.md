@@ -16,14 +16,16 @@ Node: v20.10.0
 - Storybook
 - Material UI
 - Emotion (CSS in JS)
+- Jest
 - React Testing Library
 
 ### Frontend
 
 - Next
 - React
+- Vitest
 - React Testing Library
-- Cypress
+- Playwright
 
 ### Backend
 

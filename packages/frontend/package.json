@@ -5,7 +5,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "vitest run",
+    "test:watch": "vitest watch",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@nk18chi/components": "^0.0.1",
@@ -14,15 +17,20 @@
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@playwright/test": "^1.41.0",
+    "@testing-library/react": "^14.1.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
+    "jsdom": "^23.2.0",
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^1.2.1"
   },
   "repository": {
     "url": "https://github.com/nk18chi/lerna-playground.git"

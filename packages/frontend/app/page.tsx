@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Hero from "@/components/hero";
+import Hero from "../components/Hero";
 export default async function Home() {
   const res = await fetch("http://localhost:4000/", {
     method: "POST",

@@ -1,26 +1,40 @@
 import { Injectable } from '@nestjs/common';
 import { CreateAuthorInput } from './dto/create-author.input';
 import { UpdateAuthorInput } from './dto/update-author.input';
+import { PrismaService } from 'src/prisma/prisma.service';
+import { UserService } from 'src/user/user.service';
 
 @Injectable()
 export class AuthorsService {
-  create(createAuthorInput: CreateAuthorInput) {
-    return 'This action adds a new author';
+  constructor(private prisma: PrismaService) {}
+
+  async create(input: CreateAuthorInput) {
+    return await this.prisma.author.create({
+      data: input,
+    })
   }
 
   findAll() {
-    return [{ exampleField: `This action returns an author` }]
+    return this.prisma.author.findMany({})  
   }
 
-  findOne(id: number) {
-    return { exampleField: `This action returns a #${id} author` }
+  async findOne(id: string) {
+    return this.prisma.author.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        user: true,
+      }
+    });
   }
 
-  update(id: number, updateAuthorInput: UpdateAuthorInput) {
-    return `This action updates a #${id} author`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} author`;
+  update(input: UpdateAuthorInput) {
+    return this.prisma.user.update({
+      where: {
+        id: input.id,
+      },
+      data: input,
+    });
   }
 }

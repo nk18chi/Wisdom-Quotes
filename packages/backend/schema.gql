@@ -2,29 +2,104 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type User {
+  """The email of User"""
+  email: String!
+}
+
 type Author {
-  """Example field (placeholder)"""
-  exampleField: String!
+  """The unique identifier of Author"""
+  id: ID!
+
+  """The name of Author"""
+  name: String!
+
+  """The user info of Author"""
+  user: User!
+}
+
+type Article {
+  """The id of the article"""
+  id: ID!
+
+  """The title of the article"""
+  title: String!
+
+  """The content of the article"""
+  content: String!
+
+  """The flag to publish the article"""
+  published: Boolean!
+
+  """The author of the article"""
+  author: Author!
 }
 
 type Query {
   authors: [Author!]!
-  author(id: Int!): Author!
+  author(id: String!): Author!
+  user(id: String!): User!
+  articles: [Article!]!
+  article(id: String!): Article!
 }
 
 type Mutation {
   createAuthor(createAuthorInput: CreateAuthorInput!): Author!
   updateAuthor(updateAuthorInput: UpdateAuthorInput!): Author!
-  removeAuthor(id: Int!): Author!
+  createUser(createUserInput: CreateUserInput!): User!
+  createArticle(createArticleInput: CreateArticleInput!): Article!
+  updateArticle(updateArticleInput: UpdateArticleInput!): Article!
+  removeArticle(id: String!): Article!
 }
 
 input CreateAuthorInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  """The name of Author"""
+  name: String!
+
+  """The id of User"""
+  userId: ID!
 }
 
 input UpdateAuthorInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
+  name: String!
+
+  """The id of User"""
+  userId: ID
+  id: String!
+}
+
+input CreateUserInput {
+  """The email of User"""
+  email: String!
+}
+
+input CreateArticleInput {
+  """The title of the article"""
+  title: String!
+
+  """The content of the article"""
+  content: String!
+
+  """The flag to publish the article"""
+  published: Boolean!
+
+  """The id of the author"""
+  authorId: ID!
+}
+
+input UpdateArticleInput {
+  """The title of the article"""
+  title: String!
+
+  """The content of the article"""
+  content: String!
+
+  """The flag to publish the article"""
+  published: Boolean!
+
+  """The id of the author"""
+  authorId: ID
+
+  """The id of the article"""
+  id: ID!
 }

@@ -1,31 +1,31 @@
 import { Injectable } from '@nestjs/common';
 import { CreateArticleInput } from './dto/create-article.input';
 import { UpdateArticleInput } from './dto/update-article.input';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class ArticleService {
-  constructor(private prisma: PrismaService) { }
-  
-  create(input: CreateArticleInput) {
+  constructor(private prisma: PrismaService) {}
+
+  async create(input: CreateArticleInput) {
     return this.prisma.article.create({
       data: input,
-    })
+    });
   }
 
-  findAll() {
+  async findAll() {
     return this.prisma.article.findMany({
       include: {
         author: {
           include: {
             user: true,
-          }
-        }
-      }
-    })
+          },
+        },
+      },
+    });
   }
 
-  findOne(id: string) {
+  async findOne(id: string) {
     return this.prisma.article.findUnique({
       where: {
         id,
@@ -34,19 +34,21 @@ export class ArticleService {
         author: {
           include: {
             user: true,
-          }
-        }
-      }
-    }
-    )
+          },
+        },
+      },
+    });
   }
 
-  update(id: string, updateArticleInput: UpdateArticleInput) {
+  update(updateArticleInput: UpdateArticleInput) {
+    const id = updateArticleInput.id;
+    const data = { ...updateArticleInput };
+    delete data.id;
     return this.prisma.article.update({
       where: {
         id,
       },
-      data: updateArticleInput,
+      data,
     });
   }
 
@@ -55,6 +57,6 @@ export class ArticleService {
       where: {
         id,
       },
-    })
+    });
   }
 }

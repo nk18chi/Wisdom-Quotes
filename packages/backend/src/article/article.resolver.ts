@@ -8,11 +8,6 @@ import { UpdateArticleInput } from './dto/update-article.input';
 export class ArticleResolver {
   constructor(private readonly articleService: ArticleService) {}
 
-  @Mutation(() => Article)
-  createArticle(@Args('createArticleInput') createArticleInput: CreateArticleInput) {
-    return this.articleService.create(createArticleInput);
-  }
-
   @Query(() => [Article], { name: 'articles' })
   findAll() {
     return this.articleService.findAll();
@@ -24,8 +19,17 @@ export class ArticleResolver {
   }
 
   @Mutation(() => Article)
-  updateArticle(@Args('updateArticleInput') updateArticleInput: UpdateArticleInput) {
-    return this.articleService.update(updateArticleInput.id, updateArticleInput);
+  async createArticle(
+    @Args('createArticleInput') createArticleInput: CreateArticleInput,
+  ) {
+    return this.articleService.create(createArticleInput);
+  }
+
+  @Mutation(() => Article)
+  updateArticle(
+    @Args('updateArticleInput') updateArticleInput: UpdateArticleInput,
+  ) {
+    return this.articleService.update(updateArticleInput);
   }
 
   @Mutation(() => Article)

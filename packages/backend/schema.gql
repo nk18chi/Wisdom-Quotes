@@ -89,13 +89,13 @@ input CreateArticleInput {
 
 input UpdateArticleInput {
   """The title of the article"""
-  title: String!
+  title: String
 
   """The content of the article"""
-  content: String!
+  content: String
 
   """The flag to publish the article"""
-  published: Boolean!
+  published: Boolean
 
   """The id of the author"""
   authorId: ID

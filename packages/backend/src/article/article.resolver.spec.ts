@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ArticleResolver } from './article.resolver';
 import { ArticleService } from './article.service';
 import { PrismaService } from '../prisma/prisma.service';
-import AuthorsJSON from '../fixture/authors.json';
+import AuthorJSON from '../fixture/authors.json';
 import ArticlesJson from '../fixture/articles.json';
 import UsersJson from '../fixture/users.json';
 import { ObjectId } from 'bson';
@@ -12,7 +12,7 @@ const NEW_ARTICLE_MOCK = {
   title: 'New Blog #1',
   content: 'Hello World! New Blog #1',
   published: true,
-  authorId: AuthorsJSON[0].id,
+  authorId: AuthorJSON[0].id,
 };
 
 describe('ArticleResolver', () => {
@@ -31,7 +31,7 @@ describe('ArticleResolver', () => {
       const result = await resolver.findAll();
       expect(result.length).toBeGreaterThanOrEqual(3);
       expect(result[0]).toMatchObject(ArticlesJson[0]);
-      expect(result[0].author).toMatchObject(AuthorsJSON[0]);
+      expect(result[0].author).toMatchObject(AuthorJSON[0]);
       expect(result[0].author.user).toMatchObject(UsersJson[0]);
     });
   });
@@ -40,7 +40,7 @@ describe('ArticleResolver', () => {
     it('should fetch one article from db', async () => {
       const result = await resolver.findOne(ArticlesJson[0].id);
       expect(result).toMatchObject(ArticlesJson[0]);
-      expect(result.author).toMatchObject(AuthorsJSON[0]);
+      expect(result.author).toMatchObject(AuthorJSON[0]);
       expect(result.author.user).toMatchObject(UsersJson[0]);
     });
   });

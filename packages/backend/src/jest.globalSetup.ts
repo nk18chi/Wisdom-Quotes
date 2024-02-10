@@ -1,7 +1,7 @@
 import { MongoMemoryReplSet } from 'mongodb-memory-server';
 import { PrismaService } from './prisma/prisma.service';
 import UsersJson from './fixture/users.json';
-import AuthorsJson from './fixture/authors.json';
+import AuthorJson from './fixture/authors.json';
 import ArticlesJson from './fixture/articles.json';
 
 module.exports = async () => {
@@ -15,6 +15,6 @@ module.exports = async () => {
   const instance = new PrismaService();
   instance.onModuleInit();
   await instance.user.createMany({ data: UsersJson });
-  await instance.author.createMany({ data: AuthorsJson });
+  await instance.author.createMany({ data: AuthorJson });
   await instance.article.createMany({ data: ArticlesJson });
 };

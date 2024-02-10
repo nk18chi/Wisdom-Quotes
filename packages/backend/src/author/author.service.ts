@@ -1,21 +1,24 @@
 import { Injectable } from '@nestjs/common';
 import { CreateAuthorInput } from './dto/create-author.input';
 import { UpdateAuthorInput } from './dto/update-author.input';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { UserService } from 'src/user/user.service';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
-export class AuthorsService {
+export class AuthorService {
   constructor(private prisma: PrismaService) {}
 
   async create(input: CreateAuthorInput) {
     return await this.prisma.author.create({
       data: input,
-    })
+    });
   }
 
-  findAll() {
-    return this.prisma.author.findMany({})  
+  async findAll() {
+    return this.prisma.author.findMany({
+      include: {
+        user: true,
+      },
+    });
   }
 
   async findOne(id: string) {
@@ -25,16 +28,19 @@ export class AuthorsService {
       },
       include: {
         user: true,
-      }
+      },
     });
   }
 
-  update(input: UpdateAuthorInput) {
-    return this.prisma.user.update({
+  async update(updateArticleInput: UpdateAuthorInput) {
+    const id = updateArticleInput.id;
+    const data = { ...updateArticleInput };
+    delete data.id;
+    return this.prisma.author.update({
       where: {
-        id: input.id,
+        id,
       },
-      data: input,
+      data,
     });
   }
 }

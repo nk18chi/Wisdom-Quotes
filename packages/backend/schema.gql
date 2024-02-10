@@ -3,40 +3,58 @@
 # ------------------------------------------------------
 
 type User {
-  """The email of User"""
+  """
+  The email of User
+  """
   email: String!
 }
 
 type Author {
-  """The unique identifier of Author"""
+  """
+  The unique identifier of Author
+  """
   id: ID!
 
-  """The name of Author"""
+  """
+  The name of Author
+  """
   name: String!
 
-  """The user info of Author"""
+  """
+  The user info of Author
+  """
   user: User!
 }
 
 type Article {
-  """The id of the article"""
+  """
+  The id of the article
+  """
   id: ID!
 
-  """The title of the article"""
+  """
+  The title of the article
+  """
   title: String!
 
-  """The content of the article"""
+  """
+  The content of the article
+  """
   content: String!
 
-  """The flag to publish the article"""
+  """
+  The flag to publish the article
+  """
   published: Boolean!
 
-  """The author of the article"""
+  """
+  The author of the article
+  """
   author: Author!
 }
 
 type Query {
-  authors: [Author!]!
+  author: [Author!]!
   author(id: String!): Author!
   user(id: String!): User!
   articles: [Article!]!
@@ -53,53 +71,79 @@ type Mutation {
 }
 
 input CreateAuthorInput {
-  """The name of Author"""
+  """
+  The name of Author
+  """
   name: String!
 
-  """The id of User"""
+  """
+  The id of User
+  """
   userId: ID!
 }
 
 input UpdateAuthorInput {
   name: String!
 
-  """The id of User"""
+  """
+  The id of User
+  """
   userId: ID
   id: String!
 }
 
 input CreateUserInput {
-  """The email of User"""
+  """
+  The email of User
+  """
   email: String!
 }
 
 input CreateArticleInput {
-  """The title of the article"""
+  """
+  The title of the article
+  """
   title: String!
 
-  """The content of the article"""
+  """
+  The content of the article
+  """
   content: String!
 
-  """The flag to publish the article"""
+  """
+  The flag to publish the article
+  """
   published: Boolean!
 
-  """The id of the author"""
+  """
+  The id of the author
+  """
   authorId: ID!
 }
 
 input UpdateArticleInput {
-  """The title of the article"""
+  """
+  The title of the article
+  """
   title: String
 
-  """The content of the article"""
+  """
+  The content of the article
+  """
   content: String
 
-  """The flag to publish the article"""
+  """
+  The flag to publish the article
+  """
   published: Boolean
 
-  """The id of the author"""
+  """
+  The id of the author
+  """
   authorId: ID
 
-  """The id of the article"""
+  """
+  The id of the article
+  """
   id: ID!
 }

@@ -1,23 +1,23 @@
 [
-    {
-      "id": "65b9dd681a7b471bcfe4e00a",
-      "title": "Blog Title #1",
-      "content": "Blog Content 1",
-      "published": true,
-      "authorId": "65b9dd681a7b471bcfe4e000"
-    },
-    {
-      "id": "65b9dd681a7b471bcfe4e00b",
-      "title": "Blog Title #2",
-      "content": "Blog Content 2",
-      "published": false,
-      "authorId": "65b9dd681a7b471bcfe4e001"
-    },
-    {
-      "id": "65b9dd681a7b471bcfe4e00c",
-      "title": "Blog Title #3",
-      "content": "Blog Content 3",
-      "published": true,
-      "authorId": "65b9dd681a7b471bcfe4e001"
-    }
+  {
+    "id": "65b9dd681a7b471bcfe4e00a",
+    "title": "Blog Title #1",
+    "content": "Blog Content 1",
+    "published": true,
+    "authorId": "65b9dd681a7b471bcfe4e000"
+  },
+  {
+    "id": "65b9dd681a7b471bcfe4e00b",
+    "title": "Blog Title #2",
+    "content": "Blog Content 2",
+    "published": false,
+    "authorId": "65b9dd681a7b471bcfe4e001"
+  },
+  {
+    "id": "65b9dd681a7b471bcfe4e00c",
+    "title": "Blog Title #3",
+    "content": "Blog Content 3",
+    "published": true,
+    "authorId": "65b9dd681a7b471bcfe4e001"
+  }
 ]

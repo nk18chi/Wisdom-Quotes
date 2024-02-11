@@ -1,12 +1,12 @@
 [
-    {
-      "id": "65b9dd681a7b471bcfe4e000",
-      "userId": "65b5fdb1a5ab620c89715ffa",
-      "name": "John Smith"
-    },
-    {
-      "id": "65b9dd681a7b471bcfe4e001",
-      "userId": "65b5fdb1a5ab620c89715ffb",
-      "name": "Karen Braun"
-    }
+  {
+    "id": "65b9dd681a7b471bcfe4e000",
+    "userId": "65b5fdb1a5ab620c89715ffa",
+    "name": "John Smith"
+  },
+  {
+    "id": "65b9dd681a7b471bcfe4e001",
+    "userId": "65b5fdb1a5ab620c89715ffb",
+    "name": "Karen Braun"
+  }
 ]

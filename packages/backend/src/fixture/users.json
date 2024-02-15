@@ -1,14 +1,17 @@
 [
   {
     "id": "65b5fdb1a5ab620c89715ffa",
-    "email": "test@example.com"
+    "email": "test@example.com",
+    "password": "$2b$10$v0uePfUmUAVT6fQQA6ghR.eksS243/Eu9N7..OtjY9xwEDbU./qC."
   },
   {
     "id": "65b5fdb1a5ab620c89715ffb",
-    "email": "blog@example.com"
+    "email": "blog@example.com",
+    "password": "$2b$10$a.9J/Cz.oMx4nD4YjF5j1uDCUqJq06L3ZxWL6CwnyMDOc7iK3HJ.e"
   },
   {
     "id": "65b5fdb1a5ab620c89715ffc",
-    "email": "author@example.com"
+    "email": "author@example.com",
+    "password": "$2b$10$S/801wpuoCTgius88gpGk.fPbw2ceQAYxpEQFReJhMBOSRy6tgT2i"
   }
 ]

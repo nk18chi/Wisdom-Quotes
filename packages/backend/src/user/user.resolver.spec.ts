@@ -8,6 +8,7 @@ import { ObjectId } from 'bson';
 const NEW_USER_MOCK = {
   id: new ObjectId().toString(),
   email: 'unit.testing@example.com',
+  password: 'H&8U*UBV*t87rqf43-',
 };
 
 describe('UserResolver', () => {
@@ -39,7 +40,40 @@ describe('UserResolver', () => {
   describe('createUser', () => {
     it('should create a new user in db', async () => {
       const result = await resolver.createUser(NEW_USER_MOCK);
-      expect(result).toMatchObject(NEW_USER_MOCK);
+      expect(result).toMatchObject({
+        ...NEW_USER_MOCK,
+        password: expect.not.stringMatching(NEW_USER_MOCK.password),
+      });
+    });
+    it('should thrown an error when there is invalid input', async () => {
+      await expect(resolver.createUser(NEW_USER_MOCK)).rejects.toBeDefined();
+    });
+  });
+
+  describe('login', () => {
+    it('should return the authenticated token in with the correct password', async () => {
+      expect(
+        await resolver.login({
+          email: UsersJson[0].email,
+          password: 'H&8U*UBV*t87rqf40-',
+        }),
+      ).toContain('eyJhbG');
+    });
+    it('should throw an general error with the password is incorrect', async () => {
+      await expect(
+        resolver.login({
+          email: UsersJson[0].email,
+          password: 'aaa',
+        }),
+      ).rejects.toThrow('email or password is incorrect');
+    });
+    it('should throw an general error with the user is not found with the email', async () => {
+      await expect(
+        resolver.login({
+          email: 'email_not_found@example.com',
+          password: 'aaa',
+        }),
+      ).rejects.toThrow('email or password is incorrect');
     });
   });
 });

@@ -9,6 +9,9 @@ import {
   TableRow,
 } from '@mui/material';
 import styled from '@emotion/styled';
+import { GET_ALL_ARTICLES } from '@/gql/article';
+import graphqlClient from '@/service/graphqlClient';
+import { Article } from '@/gql/types';
 
 const ArticleListContainer = styled.div`
   display: flex;
@@ -20,37 +23,23 @@ const ArticleListContainer = styled.div`
   margin: auto;
 `;
 
-const table = {
-  columns: [
-    { key: 'id', name: '#' },
-    { key: 'createdAt', name: 'Date' },
-    { key: 'title', name: 'Title' },
-    { key: 'content', name: 'Content' },
-    { key: 'author.name', name: 'Author' },
-  ],
-  rows: [
-    {
-      id: '1',
-      createdAt: new Date().toDateString(),
-      title: 'Hello World!',
-      content: 'This is my first post.',
-      author: {
-        name: 'John Smith',
-      },
-    },
-    {
-      id: '2',
-      createdAt: new Date().toDateString(),
-      title: 'Hello World! Part 2',
-      content: 'This is my second post.',
-      author: {
-        name: 'John Smith',
-      },
-    },
-  ],
-};
+const columns = [
+  { key: 'id', name: '#' },
+  { key: 'createdAt', name: 'Date' },
+  { key: 'title', name: 'Title' },
+  { key: 'content', name: 'Content' },
+  { key: 'author.name', name: 'Author' },
+];
 
-export default function ArticleList() {
+export default async function ArticleList() {
+  const client = graphqlClient();
+  const { articles }: { articles: Article[] } = await client.request(
+    GET_ALL_ARTICLES,
+    {},
+  );
+
+  console.log(articles);
+
   return (
     <ArticleListContainer>
       <Typography color="inherit" align="center" variant="h2">
@@ -60,17 +49,17 @@ export default function ArticleList() {
       <Table size="small">
         <TableHead>
           <TableRow>
-            {table.columns.map((column) => (
+            {columns.map((column) => (
               <TableCell key={column.key}>{column.name}</TableCell>
             ))}
           </TableRow>
         </TableHead>
         <TableBody>
-          {table.rows.map((row, index) => (
+          {articles.map((article, index) => (
             <TableRow key={index}>
-              {table.columns.map((column) => (
+              {columns.map((column) => (
                 <TableCell key={column.key}>
-                  {lodash.get(row, column.key)}
+                  {lodash.get(article, column.key)}
                 </TableCell>
               ))}
             </TableRow>

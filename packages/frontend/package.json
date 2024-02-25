@@ -9,6 +9,7 @@
     "lint": "next lint",
     "test": "vitest run",
     "test:watch": "vitest watch",
+    "test:e2e": "playwright test",
     "codegen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
@@ -17,12 +18,16 @@
     "@fontsource/roboto": "^5.0.8",
     "@mui/icons-material": "^5.15.10",
     "@mui/material": "^5.15.10",
+    "@nk18chi/backend": "^0.0.1",
     "@nk18chi/components": "^0.0.1",
     "@types/lodash": "^4.14.202",
+    "graphql": "^16.8.1",
+    "graphql-request": "^6.1.0",
     "lodash": "^4.17.21",
     "next": "14.0.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "swr": "^2.2.5"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.2",

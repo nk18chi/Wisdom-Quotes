@@ -20,6 +20,7 @@
     ],
     "paths": {
       "@/*": ["./*"],
+      "@nk18chi/backend": ["../backend/src"],
       "@nk18chi/components": ["../components/src"],
     },
   },

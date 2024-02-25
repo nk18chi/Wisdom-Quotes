@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AppBar, ArticleList, Hero } from '@/components';
+import { AppBar, Hero, ArticleList } from '@/components';
 
 function Index() {
   return (

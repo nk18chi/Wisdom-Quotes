@@ -15,6 +15,8 @@ model User {
   email String  @unique
   password String
   author Author?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Article {
@@ -24,6 +26,8 @@ model Article {
   published Boolean  @default(false)
   author    Author   @relation(fields: [authorId], references: [id])
   authorId  String   @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Author {
@@ -32,4 +36,6 @@ model Author {
   articles Article[]
   user   User    @relation(fields: [userId], references: [id])
   userId String  @unique @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

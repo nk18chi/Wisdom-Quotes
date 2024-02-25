@@ -49,6 +49,8 @@ describe('ArticleResolver', () => {
     it('should create a new article in db', async () => {
       const result = await resolver.createArticle(NEW_ARTICLE_MOCK);
       expect(result).toMatchObject(NEW_ARTICLE_MOCK);
+      expect(result.createdAt).toBeDefined();
+      expect(result.updatedAt).toBeDefined();
     });
   });
 
@@ -61,6 +63,7 @@ describe('ArticleResolver', () => {
         title: 'Updated Blog',
       });
       expect(result).toMatchObject({ title: 'Updated Blog' });
+      expect(result.updatedAt).not.toBe(result.createdAt);
     });
   });
 

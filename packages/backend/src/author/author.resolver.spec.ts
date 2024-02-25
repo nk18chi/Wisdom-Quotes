@@ -44,6 +44,8 @@ describe('AuthorResolver', () => {
     it('should create a new author in db', async () => {
       const result = await resolver.createAuthor(NEW_AUTHOR_MOCK);
       expect(result).toMatchObject(NEW_AUTHOR_MOCK);
+      expect(result.createdAt).toBeDefined();
+      expect(result.updatedAt).toBeDefined();
     });
   });
 
@@ -56,6 +58,7 @@ describe('AuthorResolver', () => {
         name: 'Taro Yamada',
       });
       expect(result).toMatchObject({ name: 'Taro Yamada' });
+      expect(result.updatedAt).not.toBe(result.createdAt);
     });
   });
 });

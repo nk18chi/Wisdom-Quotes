@@ -17,4 +17,10 @@ export class Article {
 
   @Field(() => Author, { description: 'The author of the article' })
   author: Author;
+
+  @Field(() => Date, { description: 'The creation date of the article' })
+  createdAt: string;
+
+  @Field(() => Date, { description: 'The updated date of the article' })
+  updatedAt: string;
 }

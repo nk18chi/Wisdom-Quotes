@@ -44,6 +44,8 @@ describe('UserResolver', () => {
         ...NEW_USER_MOCK,
         password: expect.not.stringMatching(NEW_USER_MOCK.password),
       });
+      expect(result.createdAt).toBeDefined();
+      expect(result.updatedAt).toBeDefined();
     });
     it('should thrown an error when there is invalid input', async () => {
       await expect(resolver.createUser(NEW_USER_MOCK)).rejects.toBeDefined();

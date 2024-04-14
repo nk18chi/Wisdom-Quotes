@@ -67,12 +67,12 @@ type Query {
 }
 
 type Mutation {
-  createAuthor(createAuthorInput: CreateAuthorInput!): Author!
-  updateAuthor(updateAuthorInput: UpdateAuthorInput!): Author!
-  createUser(createUserInput: CreateUserInput!): User!
-  login(loginUserInput: LoginUserInput!): Boolean!
-  createArticle(createArticleInput: CreateArticleInput!): Article!
-  updateArticle(updateArticleInput: UpdateArticleInput!): Article!
+  createAuthor(input: CreateAuthorInput!): Author!
+  updateAuthor(input: UpdateAuthorInput!): Author!
+  createUser(input: CreateUserInput!): User!
+  login(input: LoginUserInput!): Boolean!
+  createArticle(input: CreateArticleInput!): Article!
+  updateArticle(input: UpdateArticleInput!): Article!
   removeArticle(id: String!): Article!
 }
 

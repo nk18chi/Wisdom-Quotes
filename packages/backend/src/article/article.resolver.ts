@@ -19,16 +19,12 @@ export class ArticleResolver {
   }
 
   @Mutation(() => Article)
-  async createArticle(
-    @Args('createArticleInput') createArticleInput: CreateArticleInput,
-  ) {
+  async createArticle(@Args('input') createArticleInput: CreateArticleInput) {
     return this.articleService.create(createArticleInput);
   }
 
   @Mutation(() => Article)
-  updateArticle(
-    @Args('updateArticleInput') updateArticleInput: UpdateArticleInput,
-  ) {
+  updateArticle(@Args('input') updateArticleInput: UpdateArticleInput) {
     return this.articleService.update(updateArticleInput);
   }
 

@@ -19,12 +19,12 @@ export class UserResolver {
   }
 
   @Mutation(() => User)
-  createUser(@Args('createUserInput') input: CreateUserInput) {
+  createUser(@Args('input') input: CreateUserInput) {
     return this.userService.create(input);
   }
 
   @Mutation(() => Boolean)
-  async login(@Args('loginUserInput') input: LoginUserInput) {
+  async login(@Args('input') input: LoginUserInput) {
     try {
       const user = await this.userService.login(input);
       return this.userService.generateAuthenticationToken({

@@ -9,9 +9,7 @@ export class AuthorResolver {
   constructor(private readonly authorService: AuthorService) {}
 
   @Mutation(() => Author)
-  createAuthor(
-    @Args('createAuthorInput') createAuthorInput: CreateAuthorInput,
-  ) {
+  createAuthor(@Args('input') createAuthorInput: CreateAuthorInput) {
     return this.authorService.create(createAuthorInput);
   }
 
@@ -26,9 +24,7 @@ export class AuthorResolver {
   }
 
   @Mutation(() => Author)
-  updateAuthor(
-    @Args('updateAuthorInput') updateAuthorInput: UpdateAuthorInput,
-  ) {
+  updateAuthor(@Args('input') updateAuthorInput: UpdateAuthorInput) {
     return this.authorService.update(updateAuthorInput);
   }
 }

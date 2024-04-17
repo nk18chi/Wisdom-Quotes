@@ -1,3 +1,5 @@
+'use client';
+
 import * as React from 'react';
 import { Box, Link, AppBar as MuiAppBar, Toolbar } from '@mui/material';
 
@@ -17,7 +19,7 @@ const AppBar = () => {
             variant="h6"
             underline="none"
             color="inherit"
-            href="/premium-themes/onepirate/"
+            href="/"
             sx={{ fontSize: 24 }}
           >
             {'Sample App'}
@@ -27,7 +29,7 @@ const AppBar = () => {
               color="inherit"
               variant="h6"
               underline="none"
-              href="/premium-themes/onepirate/sign-in/"
+              href="/sign-in"
               sx={rightLink}
             >
               {'Sign In'}
@@ -35,7 +37,7 @@ const AppBar = () => {
             <Link
               variant="h6"
               underline="none"
-              href="/premium-themes/onepirate/sign-up/"
+              href="/sign-up/"
               sx={{ ...rightLink, color: 'secondary.main' }}
             >
               {'Sign Up'}

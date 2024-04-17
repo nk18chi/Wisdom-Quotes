@@ -21,7 +21,7 @@
     "paths": {
       "@/*": ["./*"],
       "@nk18chi/backend": ["../backend/src"],
-      "@nk18chi/components": ["../components/src"],
+      "@nk18chi/components": ["../components/dist"],
     },
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

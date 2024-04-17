@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter, Open_Sans, Roboto_Condensed } from 'next/font/google';
 import './globals.css';
 import ThemeClient from '@/components/ThemeClient';
+import { AppBar } from '@/components';
 
 const roboto = Roboto_Condensed({
   subsets: ['latin'],
@@ -20,7 +21,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${roboto.variable} font-condensed`}>
-        <ThemeClient>{children}</ThemeClient>
+        <ThemeClient>
+          <AppBar />
+          {children}
+        </ThemeClient>
       </body>
     </html>
   );

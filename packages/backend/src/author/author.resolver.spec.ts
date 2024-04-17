@@ -36,7 +36,7 @@ describe('AuthorResolver', () => {
     it('should fetch one author from db', async () => {
       const result = await resolver.findOne(AuthorsJSON[0].id);
       expect(result).toMatchObject(AuthorsJSON[0]);
-      expect(result.user).toMatchObject(UsersJson[0]);
+      expect(result?.user).toMatchObject(UsersJson[0]);
     });
   });
 
@@ -53,10 +53,14 @@ describe('AuthorResolver', () => {
     it('should update the title of author in db', async () => {
       const before = await resolver.findOne(NEW_AUTHOR_MOCK.id);
       expect(before).toMatchObject({ name: NEW_AUTHOR_MOCK.name });
-      const result = await resolver.updateAuthor({
-        id: NEW_AUTHOR_MOCK.id,
-        name: 'Taro Yamada',
-      });
+      const result = await resolver.updateAuthor(
+        {
+          id: NEW_AUTHOR_MOCK.id,
+        },
+        {
+          name: 'Taro Yamada',
+        },
+      );
       expect(result).toMatchObject({ name: 'Taro Yamada' });
       expect(result.updatedAt).not.toBe(result.createdAt);
     });

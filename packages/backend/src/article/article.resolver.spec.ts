@@ -40,8 +40,8 @@ describe('ArticleResolver', () => {
     it('should fetch one article from db', async () => {
       const result = await resolver.findOne(ArticlesJson[0].id);
       expect(result).toMatchObject(ArticlesJson[0]);
-      expect(result.author).toMatchObject(AuthorJSON[0]);
-      expect(result.author.user).toMatchObject(UsersJson[0]);
+      expect(result?.author).toMatchObject(AuthorJSON[0]);
+      expect(result?.author.user).toMatchObject(UsersJson[0]);
     });
   });
 
@@ -58,10 +58,14 @@ describe('ArticleResolver', () => {
     it('should update the title of article in db', async () => {
       const before = await resolver.findOne(NEW_ARTICLE_MOCK.id);
       expect(before).toMatchObject({ title: NEW_ARTICLE_MOCK.title });
-      const result = await resolver.updateArticle({
-        id: NEW_ARTICLE_MOCK.id,
-        title: 'Updated Blog',
-      });
+      const result = await resolver.updateArticle(
+        {
+          id: NEW_ARTICLE_MOCK.id,
+        },
+        {
+          title: 'Updated Blog',
+        },
+      );
       expect(result).toMatchObject({ title: 'Updated Blog' });
       expect(result.updatedAt).not.toBe(result.createdAt);
     });

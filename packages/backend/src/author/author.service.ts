@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateAuthorInput } from './dto/create-author.input';
 import { UpdateAuthorInput } from './dto/update-author.input';
 import { PrismaService } from '../prisma/prisma.service';
+import { UpdateAuthorFilter } from './dto/update-author.filter';
 
 @Injectable()
 export class AuthorService {
@@ -32,15 +33,12 @@ export class AuthorService {
     });
   }
 
-  async update(updateArticleInput: UpdateAuthorInput) {
-    const id = updateArticleInput.id;
-    const data = { ...updateArticleInput };
-    delete data.id;
+  async update(filter: UpdateAuthorFilter, input: UpdateAuthorInput) {
     return this.prisma.author.update({
       where: {
-        id,
+        ...filter,
       },
-      data,
+      data: input,
     });
   }
 }

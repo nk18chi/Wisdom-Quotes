@@ -1,7 +1,7 @@
 import { InputType, Field } from '@nestjs/graphql';
 
 @InputType()
-export class UpdateAuthorInput {
+export class UpdateAuthorFilter {
   @Field(() => String)
-  name: string;
+  id: string;
 }

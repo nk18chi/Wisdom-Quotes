@@ -3,6 +3,7 @@ import { ArticleService } from './article.service';
 import { Article } from './entities/article.entity';
 import { CreateArticleInput } from './dto/create-article.input';
 import { UpdateArticleInput } from './dto/update-article.input';
+import { UpdateArticleFilter } from './dto/update-article.filter';
 
 @Resolver(() => Article)
 export class ArticleResolver {
@@ -19,13 +20,16 @@ export class ArticleResolver {
   }
 
   @Mutation(() => Article)
-  async createArticle(@Args('input') createArticleInput: CreateArticleInput) {
-    return this.articleService.create(createArticleInput);
+  async createArticle(@Args('input') input: CreateArticleInput) {
+    return this.articleService.create(input);
   }
 
   @Mutation(() => Article)
-  updateArticle(@Args('input') updateArticleInput: UpdateArticleInput) {
-    return this.articleService.update(updateArticleInput);
+  updateArticle(
+    @Args('filter') filter: UpdateArticleFilter,
+    @Args('input') input: UpdateArticleInput,
+  ) {
+    return this.articleService.update(filter, input);
   }
 
   @Mutation(() => Article)

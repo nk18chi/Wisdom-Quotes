@@ -3,14 +3,15 @@ import { AuthorService } from './author.service';
 import { Author } from './entities/author.entity';
 import { CreateAuthorInput } from './dto/create-author.input';
 import { UpdateAuthorInput } from './dto/update-author.input';
+import { UpdateAuthorFilter } from './dto/update-author.filter';
 
 @Resolver(() => Author)
 export class AuthorResolver {
   constructor(private readonly authorService: AuthorService) {}
 
   @Mutation(() => Author)
-  createAuthor(@Args('input') createAuthorInput: CreateAuthorInput) {
-    return this.authorService.create(createAuthorInput);
+  createAuthor(@Args('input') input: CreateAuthorInput) {
+    return this.authorService.create(input);
   }
 
   @Query(() => [Author], { name: 'author' })
@@ -24,7 +25,10 @@ export class AuthorResolver {
   }
 
   @Mutation(() => Author)
-  updateAuthor(@Args('input') updateAuthorInput: UpdateAuthorInput) {
-    return this.authorService.update(updateAuthorInput);
+  updateAuthor(
+    @Args('filter') filter: UpdateAuthorFilter,
+    @Args('input') input: UpdateAuthorInput,
+  ) {
+    return this.authorService.update(filter, input);
   }
 }

@@ -35,6 +35,20 @@ type Author {
   updatedAt: DateTime!
 }
 
+type LoginUser {
+  """The unique identifier of user"""
+  id: ID!
+
+  """The name of Author"""
+  name: String
+
+  """The email of User"""
+  email: String!
+
+  """The token of User"""
+  token: String!
+}
+
 type Article {
   """The id of the article"""
   id: ID!
@@ -68,11 +82,11 @@ type Query {
 
 type Mutation {
   createAuthor(input: CreateAuthorInput!): Author!
-  updateAuthor(input: UpdateAuthorInput!): Author!
+  updateAuthor(filter: UpdateAuthorFilter!, input: UpdateAuthorInput!): Author!
   createUser(input: CreateUserInput!): User!
-  login(input: LoginUserInput!): Boolean!
+  login(input: LoginUserInput!): LoginUser!
   createArticle(input: CreateArticleInput!): Article!
-  updateArticle(input: UpdateArticleInput!): Article!
+  updateArticle(filter: UpdateArticleFilter!, input: UpdateArticleInput!): Article!
   removeArticle(id: String!): Article!
 }
 
@@ -84,12 +98,12 @@ input CreateAuthorInput {
   userId: ID!
 }
 
+input UpdateAuthorFilter {
+  id: String!
+}
+
 input UpdateAuthorInput {
   name: String!
-
-  """The id of User"""
-  userId: ID
-  id: String!
 }
 
 input CreateUserInput {
@@ -122,6 +136,11 @@ input CreateArticleInput {
   authorId: ID!
 }
 
+input UpdateArticleFilter {
+  """The id of the article"""
+  id: ID!
+}
+
 input UpdateArticleInput {
   """The title of the article"""
   title: String
@@ -131,10 +150,4 @@ input UpdateArticleInput {
 
   """The flag to publish the article"""
   published: Boolean
-
-  """The id of the author"""
-  authorId: ID
-
-  """The id of the article"""
-  id: ID!
 }

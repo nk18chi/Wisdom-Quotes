@@ -3,6 +3,7 @@ import { UserService } from './user.service';
 import { User } from './entities/user.entity';
 import { CreateUserInput } from './dto/create-user.input';
 import { LoginUserInput } from './dto/login-user.input';
+import { LoginUser } from './entities/loginUser.entity';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -23,14 +24,19 @@ export class UserResolver {
     return this.userService.create(input);
   }
 
-  @Mutation(() => Boolean)
-  async login(@Args('input') input: LoginUserInput) {
+  @Mutation(() => LoginUser)
+  async login(@Args('input') input: LoginUserInput): Promise<LoginUser> {
     try {
       const user = await this.userService.login(input);
-      return this.userService.generateAuthenticationToken({
-        userId: user.id,
-        expiryTime: '14d',
-      });
+      return {
+        id: user.id,
+        name: user.author?.name ?? null,
+        email: user.email,
+        token: await this.userService.generateAuthenticationToken({
+          userId: user.id,
+          expiryTime: '14d',
+        }),
+      };
     } catch {
       throw new Error('email or password is incorrect');
     }

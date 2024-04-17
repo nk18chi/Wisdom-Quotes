@@ -59,7 +59,12 @@ describe('UserResolver', () => {
           email: UsersJson[0].email,
           password: 'H&8U*UBV*t87rqf40-',
         }),
-      ).toContain('eyJhbG');
+      ).toEqual({
+        id: UsersJson[0].id,
+        name: 'John Smith',
+        email: UsersJson[0].email,
+        token: expect.any(String),
+      });
     });
     it('should throw an general error with the password is incorrect', async () => {
       await expect(

@@ -26,6 +26,9 @@ export class UserService {
 
   async login(input: LoginUserInput) {
     const user = await this.prisma.user.findUnique({
+      include: {
+        author: true,
+      },
       where: {
         email: input.email,
       },

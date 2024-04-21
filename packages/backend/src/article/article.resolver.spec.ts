@@ -28,7 +28,7 @@ describe('ArticleResolver', () => {
 
   describe('articles', () => {
     it('should fetch all articles from db', async () => {
-      const result = await resolver.findAll();
+      const result = await resolver.findAll({});
       expect(result.length).toBeGreaterThanOrEqual(3);
       expect(result[0]).toMatchObject(ArticlesJson[0]);
       expect(result[0].author).toMatchObject(AuthorJSON[0]);

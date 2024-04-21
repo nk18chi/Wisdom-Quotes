@@ -4,14 +4,15 @@ import { Article } from './entities/article.entity';
 import { CreateArticleInput } from './dto/create-article.input';
 import { UpdateArticleInput } from './dto/update-article.input';
 import { UpdateArticleFilter } from './dto/update-article.filter';
+import { FindArticlesFilter } from './dto/find-articles.filter';
 
 @Resolver(() => Article)
 export class ArticleResolver {
   constructor(private readonly articleService: ArticleService) {}
 
   @Query(() => [Article], { name: 'articles' })
-  findAll() {
-    return this.articleService.findAll();
+  findAll(@Args('filter') filter: FindArticlesFilter) {
+    return this.articleService.findAll(filter);
   }
 
   @Query(() => Article, { name: 'article' })

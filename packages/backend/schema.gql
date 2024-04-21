@@ -76,8 +76,13 @@ type Query {
   author(id: String!): Author!
   user(id: String!): User!
   users: [User!]!
-  articles: [Article!]!
+  articles(filter: FindArticlesFilter!): [Article!]!
   article(id: String!): Article!
+}
+
+input FindArticlesFilter {
+  """The id of the author"""
+  authorId: ID
 }
 
 type Mutation {

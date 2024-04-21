@@ -3,6 +3,7 @@ import { CreateArticleInput } from './dto/create-article.input';
 import { UpdateArticleInput } from './dto/update-article.input';
 import { PrismaService } from '../prisma/prisma.service';
 import { UpdateArticleFilter } from './dto/update-article.filter';
+import { FindArticlesFilter } from './dto/find-articles.filter';
 
 @Injectable()
 export class ArticleService {
@@ -14,8 +15,11 @@ export class ArticleService {
     });
   }
 
-  async findAll() {
+  async findAll(filter: FindArticlesFilter) {
     return this.prisma.article.findMany({
+      where: {
+        ...filter,
+      },
       include: {
         author: {
           include: {

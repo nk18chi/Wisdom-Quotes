@@ -6,6 +6,9 @@ type User {
   """The email of User"""
   email: String!
 
+  """The author of User"""
+  author: Author
+
   """The creation date of the User"""
   createdAt: DateTime!
 

@@ -61,6 +61,9 @@ export class UserService {
       where: {
         id,
       },
+      include: {
+        author: true,
+      },
     });
   }
 }

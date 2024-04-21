@@ -1,12 +1,13 @@
 import * as React from 'react';
-import { AppBar, Hero, ArticleList } from '@/components';
+import { Hero, ArticleList } from '@/components';
+import OwnArticleList from '@/components/List/OwnArticleList';
 
-function Index() {
+async function Index() {
   return (
     <React.Fragment>
-      <AppBar />
       <Hero />
       <ArticleList />
+      <OwnArticleList />
     </React.Fragment>
   );
 }

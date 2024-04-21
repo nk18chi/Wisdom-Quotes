@@ -10,3 +10,13 @@ export const LOGIN = gql`
     }
   }
 `;
+
+export const GET_AUTHOR_ID_BY_USER_ID = gql`
+  query User($userId: String!) {
+    user(id: $userId) {
+      author {
+        id
+      }
+    }
+  }
+`;

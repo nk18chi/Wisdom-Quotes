@@ -1,8 +1,8 @@
 import { gql } from 'graphql-request';
 
 export const GET_ALL_ARTICLES = gql`
-  {
-    articles {
+  query Articles($filter: FindArticlesFilter!) {
+    articles(filter: $filter) {
       content
       id
       published

@@ -8,20 +8,10 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import styled from '@emotion/styled';
 import { GET_ALL_ARTICLES } from '@/gql/article';
 import graphqlClient from '@/service/graphqlClient';
 import { Article } from '@/gql/types';
-
-const ArticleListContainer = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  padding: 20px;
-  gap: 12px;
-  max-width: 75%;
-  margin: auto;
-`;
+import ArticleListContainer from './ListContainer';
 
 const columns = [
   { key: 'id', name: '#' },
@@ -35,15 +25,13 @@ export default async function ArticleList() {
   const client = graphqlClient();
   const { articles }: { articles: Article[] } = await client.request(
     GET_ALL_ARTICLES,
-    {},
+    { filter: {} },
   );
-
-  console.log(articles);
 
   return (
     <ArticleListContainer>
       <Typography color="inherit" align="center" variant="h2">
-        Articles
+        All Articles
       </Typography>
 
       <Table size="small">

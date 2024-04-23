@@ -4,8 +4,6 @@ import * as React from 'react';
 import { Box, TextField } from '@mui/material';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Button } from '@nk18chi/components';
-import graphqlClient from '@/service/graphqlClient';
-import { LOGIN } from '@/gql/user';
 import { useRouter } from 'next/navigation';
 import { Cancel } from '@mui/icons-material/';
 import { signIn } from 'next-auth/react';
@@ -36,8 +34,6 @@ export default function SignInForm() {
     }
     router.push('/');
   };
-
-  console.log('error', requestErrors);
 
   return (
     <React.Fragment>

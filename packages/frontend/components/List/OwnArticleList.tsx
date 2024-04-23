@@ -27,7 +27,6 @@ const columns = [
 export default async function OwnArticleList() {
   const session: { user: LoginUser } | null =
     await getServerSession(authOptions);
-  console.log(session);
   if (!session?.user.id) {
     return null;
   }
@@ -38,7 +37,6 @@ export default async function OwnArticleList() {
   }>(GET_AUTHOR_ID_BY_USER_ID, {
     userId: session.user.id,
   });
-  console.log(user, session.user.id);
   if (!user?.author?.id) {
     return null;
   }

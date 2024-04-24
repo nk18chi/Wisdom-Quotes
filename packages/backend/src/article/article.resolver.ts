@@ -5,10 +5,16 @@ import { CreateArticleInput } from './dto/create-article.input';
 import { UpdateArticleInput } from './dto/update-article.input';
 import { UpdateArticleFilter } from './dto/update-article.filter';
 import { FindArticlesFilter } from './dto/find-articles.filter';
+import { GqlUser } from '../decorators/gqlUser.decorator';
+import { UserService } from 'src/user/user.service';
+import { SignedInUser } from 'src/user/entities/signedInUser.entity';
 
 @Resolver(() => Article)
 export class ArticleResolver {
-  constructor(private readonly articleService: ArticleService) {}
+  constructor(
+    private readonly articleService: ArticleService,
+    private readonly userService: UserService,
+  ) {}
 
   @Query(() => [Article], { name: 'articles' })
   findAll(@Args('filter') filter: FindArticlesFilter) {
@@ -21,8 +27,17 @@ export class ArticleResolver {
   }
 
   @Mutation(() => Article)
-  async createArticle(@Args('input') input: CreateArticleInput) {
-    return this.articleService.create(input);
+  async createArticle(
+    @Args('input') input: CreateArticleInput,
+    @GqlUser() user: SignedInUser,
+  ) {
+    if (!user) new Error('User not found');
+    const authorUser = await this.userService.findOne(user._id);
+    if (!authorUser?.author?.id) new Error('Author not found');
+    return this.articleService.create({
+      ...input,
+      authorId: authorUser!.author!.id,
+    });
   }
 
   @Mutation(() => Article)

@@ -13,6 +13,7 @@ import { ArticleModule } from './article/article.module';
       autoSchemaFile: 'schema.gql',
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
+      context: ({ req }) => ({ req }),
     }),
     AuthorModule,
     UserModule,

@@ -1,4 +1,4 @@
-import { InputType, Field, ID } from '@nestjs/graphql';
+import { InputType, Field } from '@nestjs/graphql';
 
 @InputType()
 export class CreateArticleInput {
@@ -10,7 +10,4 @@ export class CreateArticleInput {
 
   @Field(() => Boolean, { description: 'The flag to publish the article' })
   published: boolean;
-
-  @Field(() => ID, { description: 'The id of the author' })
-  authorId: string;
 }

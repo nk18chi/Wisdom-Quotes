@@ -12,7 +12,6 @@ const NEW_ARTICLE_MOCK = {
   title: 'New Blog #1',
   content: 'Hello World! New Blog #1',
   published: true,
-  authorId: AuthorJSON[0].id,
 };
 
 describe('ArticleResolver', () => {

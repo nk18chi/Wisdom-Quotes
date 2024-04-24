@@ -139,9 +139,6 @@ input CreateArticleInput {
 
   """The flag to publish the article"""
   published: Boolean!
-
-  """The id of the author"""
-  authorId: ID!
 }
 
 input UpdateArticleFilter {

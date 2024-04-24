@@ -9,7 +9,7 @@ import { FindArticlesFilter } from './dto/find-articles.filter';
 export class ArticleService {
   constructor(private prisma: PrismaService) {}
 
-  async create(input: CreateArticleInput) {
+  async create(input: CreateArticleInput & { authorId: string }) {
     return this.prisma.article.create({
       data: input,
     });

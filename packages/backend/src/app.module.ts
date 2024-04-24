@@ -5,6 +5,10 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
 import { AuthorModule } from './author/author.module';
 import { UserModule } from './user/user.module';
 import { ArticleModule } from './article/article.module';
+import { applyMiddleware } from 'graphql-middleware';
+import { GraphQLSchema } from 'graphql';
+import { permissions } from './graphql-shield/permission';
+import jwt from 'jsonwebtoken';
 
 @Module({
   imports: [
@@ -13,7 +17,18 @@ import { ArticleModule } from './article/article.module';
       autoSchemaFile: 'schema.gql',
       playground: false,
       plugins: [ApolloServerPluginLandingPageLocalDefault()],
-      context: ({ req }) => ({ req }),
+      context: ({ req }) => ({
+        user: req.headers.authorization
+          ? jwt.verify(
+              req.headers.authorization,
+              process.env.TOKEN_SECRET_KEY as string,
+            )
+          : null,
+      }),
+      transformSchema: (schema: GraphQLSchema) => {
+        schema = applyMiddleware(schema, permissions);
+        return schema;
+      },
     }),
     AuthorModule,
     UserModule,

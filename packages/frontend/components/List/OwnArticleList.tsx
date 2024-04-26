@@ -23,6 +23,8 @@ const columns = [
   { key: 'title', name: 'Title' },
   { key: 'content', name: 'Content' },
   { key: 'author.name', name: 'Author' },
+  { key: 'published', name: 'Published' },
+  { key: 'link', name: 'Link' },
 ];
 
 export default async function OwnArticleList() {
@@ -49,6 +51,11 @@ export default async function OwnArticleList() {
       },
     },
   );
+  const normalizedArticles = articles.map((article) => ({
+    ...article,
+    published: article.published ? 'Yes' : 'No',
+    link: <a href={`/article/${article.id}/edit`}>Edit</a>,
+  }));
 
   return (
     <ArticleListContainer>
@@ -65,7 +72,7 @@ export default async function OwnArticleList() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {articles.map((article, index) => (
+          {normalizedArticles.map((article, index) => (
             <TableRow key={index}>
               {columns.map((column) => (
                 <TableCell key={column.key}>

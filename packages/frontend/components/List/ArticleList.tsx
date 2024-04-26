@@ -19,6 +19,7 @@ const columns = [
   { key: 'title', name: 'Title' },
   { key: 'content', name: 'Content' },
   { key: 'author.name', name: 'Author' },
+  { key: 'link', name: 'Link' },
 ];
 
 export default async function ArticleList() {
@@ -31,6 +32,10 @@ export default async function ArticleList() {
       },
     },
   );
+  const normalizedArticles = articles.map((article) => ({
+    ...article,
+    link: <a href={`/article/${article.id}`}>Detail</a>,
+  }));
 
   return (
     <ArticleListContainer>
@@ -47,7 +52,7 @@ export default async function ArticleList() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {articles.map((article, index) => (
+          {normalizedArticles.map((article, index) => (
             <TableRow key={index}>
               {columns.map((column) => (
                 <TableCell key={column.key}>

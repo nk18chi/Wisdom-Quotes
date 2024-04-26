@@ -25,7 +25,11 @@ export default async function ArticleList() {
   const client = graphqlClient();
   const { articles }: { articles: Article[] } = await client.request(
     GET_ALL_ARTICLES,
-    { filter: {} },
+    {
+      filter: {
+        published: true,
+      },
+    },
   );
 
   return (

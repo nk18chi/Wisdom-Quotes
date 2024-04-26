@@ -84,6 +84,9 @@ type Query {
 }
 
 input FindArticlesFilter {
+  """Filter by published status"""
+  published: Boolean
+
   """The id of the author"""
   authorId: ID
 }

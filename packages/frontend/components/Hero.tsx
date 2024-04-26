@@ -1,7 +1,6 @@
 'use client';
 
 import * as React from 'react';
-import { Button } from '@nk18chi/components';
 import { Typography } from '@mui/material';
 import styled from '@emotion/styled';
 import { useSession } from 'next-auth/react';
@@ -25,15 +24,6 @@ export default function Hero() {
       <Typography color="inherit" align="center" variant="h2">
         Welcome Back, {session?.user.name ?? 'Guest'}
       </Typography>
-      <Button
-        color="secondary"
-        variant="contained"
-        size="large"
-        component="a"
-        href="/add-article"
-        sx={{ minWidth: 200 }}
-        label="Add Article"
-      />
     </HeroContainer>
   );
 }

@@ -14,3 +14,11 @@ export const GET_ALL_ARTICLES = gql`
     }
   }
 `;
+
+export const CREATE_ARTICLE = gql`
+  mutation CreateArticle($input: CreateArticleInput!) {
+    createArticle(input: $input) {
+      id
+    }
+  }
+`;

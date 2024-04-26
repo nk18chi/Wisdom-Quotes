@@ -14,13 +14,13 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.userId = user.id;
-        token.accessToken = user.id;
+        token.accessToken = user.token;
       }
       return token;
     },
     async session({ session, token }) {
-      (session as any).user.id = token.userId;
-      (session as any).accessToken = token.accessToken;
+      session.user.id = token.userId;
+      session.accessToken = token.accessToken;
       return session;
     },
   },
@@ -32,17 +32,20 @@ export const authOptions: NextAuthOptions = {
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials) {
+        if (!credentials?.email || !credentials?.password) {
+          throw new Error('Something went wrong with login');
+        }
         const client = graphqlClient();
         try {
           const { login } = await client.request<{ login: LoginUser }>(LOGIN, {
             input: {
-              email: credentials?.email,
+              email: credentials.email,
               password: credentials?.password,
             },
           });
           return {
             id: login.id,
-            email: credentials?.email,
+            email: credentials.email,
             name: login.name,
             token: login.token,
           };

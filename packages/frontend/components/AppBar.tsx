@@ -60,7 +60,7 @@ const SignedInUserLinks = () => {
 };
 
 const AppBar = () => {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   return (
     <div>
       <MuiAppBar position="fixed">

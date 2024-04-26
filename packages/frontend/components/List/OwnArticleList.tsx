@@ -15,6 +15,7 @@ import ArticleListContainer from './ListContainer';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { GET_AUTHOR_ID_BY_USER_ID } from '@/gql/user';
+import AddArticleButton from './AddArticleButton';
 
 const columns = [
   { key: 'id', name: '#' },
@@ -75,6 +76,7 @@ export default async function OwnArticleList() {
           ))}
         </TableBody>
       </Table>
+      <AddArticleButton />
     </ArticleListContainer>
   );
 }

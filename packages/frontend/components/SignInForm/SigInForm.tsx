@@ -22,7 +22,6 @@ export default function SignInForm() {
   const router = useRouter();
   const [requestErrors, setRequestErrors] = React.useState<string[]>([]);
   const onSubmit: SubmitHandler<ISignInFormInput> = async (data) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
     const res: any = await signIn('credentials', {
       redirect: false,
       email: data.email,
@@ -53,7 +52,6 @@ export default function SignInForm() {
           })}
           autoComplete="email"
           autoFocus
-          // disabled={submitting || sent}
           fullWidth
           label="Email"
           margin="normal"
@@ -71,7 +69,6 @@ export default function SignInForm() {
             },
           })}
           fullWidth
-          // disabled={submitting || sent}
           required
           name="password"
           autoComplete="current-password"

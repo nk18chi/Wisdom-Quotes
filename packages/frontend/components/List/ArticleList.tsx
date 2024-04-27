@@ -12,6 +12,7 @@ import { GET_ALL_ARTICLES } from '@/gql/article';
 import graphqlClient from '@/service/graphqlClient';
 import { Article } from '@/gql/types';
 import ArticleListContainer from './ListContainer';
+import { DateTime } from 'luxon';
 
 const columns = [
   { key: 'id', name: '#' },
@@ -35,6 +36,9 @@ export default async function ArticleList() {
   const normalizedArticles = articles.map((article) => ({
     ...article,
     link: <a href={`/article/${article.id}`}>Detail</a>,
+    createdAt: DateTime.fromISO(article.createdAt).toLocaleString(
+      DateTime.DATE_MED,
+    ),
   }));
 
   return (
@@ -55,7 +59,7 @@ export default async function ArticleList() {
           {normalizedArticles.map((article, index) => (
             <TableRow key={index}>
               {columns.map((column) => (
-                <TableCell key={column.key}>
+                <TableCell key={column.key} className="truncate max-w-md">
                   {lodash.get(article, column.key)}
                 </TableCell>
               ))}

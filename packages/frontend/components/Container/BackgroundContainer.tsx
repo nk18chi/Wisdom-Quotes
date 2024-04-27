@@ -12,7 +12,7 @@ const Container = styled(Box)`
   text-align: center;
 `;
 
-export default function FormContainer({
+export default function BackgroundContainer({
   children,
 }: {
   children: React.ReactNode;

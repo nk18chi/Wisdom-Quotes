@@ -15,6 +15,22 @@ export const GET_ALL_ARTICLES = gql`
   }
 `;
 
+export const GET_ONE_ARTICLE = gql`
+  query Article($articleId: String!) {
+    article(id: $articleId) {
+      id
+      content
+      createdAt
+      published
+      title
+      updatedAt
+      author {
+        name
+      }
+    }
+  }
+`;
+
 export const CREATE_ARTICLE = gql`
   mutation CreateArticle($input: CreateArticleInput!) {
     createArticle(input: $input) {

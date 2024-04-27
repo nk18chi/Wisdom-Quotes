@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Link, Typography } from '@mui/material';
-import FormContainer from '@/components/SignInForm/FormContainer';
+import BackgroundContainer from '@/components/Container/BackgroundContainer';
 import SignInForm from '@/components/SignInForm/SigInForm';
 
 function SignIn() {
   return (
-    <FormContainer>
+    <BackgroundContainer>
       <Typography variant="h3" gutterBottom align="center">
         Sign In
       </Typography>
@@ -16,7 +16,7 @@ function SignIn() {
         </Link>
       </Typography>
       <SignInForm />
-    </FormContainer>
+    </BackgroundContainer>
   );
 }
 

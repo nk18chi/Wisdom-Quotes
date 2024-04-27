@@ -13,14 +13,6 @@ const Container = styled.div`
   margin: auto;
 `;
 
-const columns = [
-  { key: 'id', name: '#' },
-  { key: 'createdAt', name: 'Date' },
-  { key: 'title', name: 'Title' },
-  { key: 'content', name: 'Content' },
-  { key: 'author.name', name: 'Author' },
-];
-
 export default function ArticleListContainer({
   children,
 }: {

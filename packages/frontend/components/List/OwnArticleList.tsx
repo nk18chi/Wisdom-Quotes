@@ -16,6 +16,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { GET_AUTHOR_ID_BY_USER_ID } from '@/gql/user';
 import AddArticleButton from './AddArticleButton';
+import { DateTime } from 'luxon';
 
 const columns = [
   { key: 'id', name: '#' },
@@ -55,6 +56,9 @@ export default async function OwnArticleList() {
     ...article,
     published: article.published ? 'Yes' : 'No',
     link: <a href={`/article/${article.id}/edit`}>Edit</a>,
+    createdAt: DateTime.fromISO(article.createdAt).toLocaleString(
+      DateTime.DATE_MED,
+    ),
   }));
 
   return (
@@ -75,7 +79,7 @@ export default async function OwnArticleList() {
           {normalizedArticles.map((article, index) => (
             <TableRow key={index}>
               {columns.map((column) => (
-                <TableCell key={column.key}>
+                <TableCell key={column.key} className="truncate max-w-md">
                   {lodash.get(article, column.key)}
                 </TableCell>
               ))}

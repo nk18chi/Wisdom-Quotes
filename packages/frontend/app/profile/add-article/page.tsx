@@ -1,16 +1,16 @@
 import * as React from 'react';
 import { Typography } from '@mui/material';
-import FormContainer from '@/components/SignInForm/FormContainer';
+import BackgroundContainer from '@/components/Container/BackgroundContainer';
 import ArticleForm from '@/components/ArticleForm/ArticleForm';
 
 function AddArticlePage() {
   return (
-    <FormContainer>
+    <BackgroundContainer>
       <Typography variant="h3" gutterBottom align="center">
         Add Article
       </Typography>
       <ArticleForm />
-    </FormContainer>
+    </BackgroundContainer>
   );
 }
 

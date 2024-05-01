@@ -20,56 +20,45 @@ async function ArticlePage({ params }: ArticlePageProps) {
     return notFound();
   }
   const client = graphqlClient();
-  try {
-    const { article } = await client.request<{ article: Article }>(
-      GET_ONE_ARTICLE,
-      {
-        articleId: params.articleId,
-      },
-    );
-    if (!article || !article.published) {
-      return notFound();
-    }
-    return (
-      <BackgroundContainer>
-        <Typography
-          variant="h1"
-          gutterBottom
-          align="center"
-          className="text-3xl"
-        >
-          {article.title}
-        </Typography>
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          spacing={2}
-        >
-          <Stack direction="row" spacing={2} alignItems="center">
-            <Avatar alt={article.author.name} />
-            <p className="text-left">{article.author.name}</p>{' '}
-          </Stack>
-          <p className="text-left">
-            Creation Date:{' '}
-            {DateTime.fromISO(article.createdAt).toLocaleString(
-              DateTime.DATE_MED,
-            )}
-          </p>
+  const { article } = await client.request<{ article: Article }>(
+    GET_ONE_ARTICLE,
+    {
+      articleId: params.articleId,
+    },
+  );
+  if (!article || !article.published) {
+    return notFound();
+  }
+  return (
+    <BackgroundContainer>
+      <Typography variant="h1" gutterBottom align="center" className="text-3xl">
+        {article.title}
+      </Typography>
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        spacing={2}
+      >
+        <Stack direction="row" spacing={2} alignItems="center">
+          <Avatar alt={article.author.name} />
+          <p className="text-left">{article.author.name}</p>{' '}
         </Stack>
-
-        <p className="whitespace-pre-line text-left">{article.content}</p>
         <p className="text-left">
-          Last Updated Date:{' '}
-          {DateTime.fromISO(article.updatedAt).toLocaleString(
+          Creation Date:{' '}
+          {DateTime.fromISO(article.createdAt).toLocaleString(
             DateTime.DATE_MED,
           )}
         </p>
-      </BackgroundContainer>
-    );
-  } catch {
-    return notFound();
-  }
+      </Stack>
+
+      <p className="whitespace-pre-line text-left">{article.content}</p>
+      <p className="text-left">
+        Last Updated Date:{' '}
+        {DateTime.fromISO(article.updatedAt).toLocaleString(DateTime.DATE_MED)}
+      </p>
+    </BackgroundContainer>
+  );
 }
 
 export default ArticlePage;

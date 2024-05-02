@@ -48,8 +48,6 @@ export type Author = {
 };
 
 export type CreateArticleInput = {
-  /** The id of the author */
-  authorId: Scalars['ID']['input'];
   /** The content of the article */
   content: Scalars['String']['input'];
   /** The flag to publish the article */
@@ -70,6 +68,13 @@ export type CreateUserInput = {
   email: Scalars['String']['input'];
   /** The password of User */
   password: Scalars['String']['input'];
+};
+
+export type FindArticlesFilter = {
+  /** The id of the author */
+  authorId?: InputMaybe<Scalars['ID']['input']>;
+  /** Filter by published status */
+  published?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type LoginUser = {
@@ -154,6 +159,11 @@ export type QueryArticleArgs = {
 };
 
 
+export type QueryArticlesArgs = {
+  filter: FindArticlesFilter;
+};
+
+
 export type QueryAuthorArgs = {
   id: Scalars['String']['input'];
 };
@@ -187,10 +197,14 @@ export type UpdateAuthorInput = {
 
 export type User = {
   __typename?: 'User';
+  /** The author of User */
+  author?: Maybe<Author>;
   /** The creation date of the User */
   createdAt: Scalars['DateTime']['output'];
   /** The email of User */
   email: Scalars['String']['output'];
+  /** The id of the User */
+  id: Scalars['ID']['output'];
   /** The updated date of the User */
   updatedAt: Scalars['DateTime']['output'];
 };

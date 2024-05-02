@@ -26,6 +26,9 @@ export const GET_ONE_ARTICLE = gql`
       updatedAt
       author {
         name
+        user {
+          id
+        }
       }
     }
   }
@@ -34,6 +37,17 @@ export const GET_ONE_ARTICLE = gql`
 export const CREATE_ARTICLE = gql`
   mutation CreateArticle($input: CreateArticleInput!) {
     createArticle(input: $input) {
+      id
+    }
+  }
+`;
+
+export const UPDATE_ARTICLE = gql`
+  mutation UpdateArticle(
+    $filter: UpdateArticleFilter!
+    $input: UpdateArticleInput!
+  ) {
+    updateArticle(filter: $filter, input: $input) {
       id
     }
   }

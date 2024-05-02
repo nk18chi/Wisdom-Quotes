@@ -14,7 +14,9 @@ import { useRouter } from 'next/navigation';
 import { Cancel } from '@mui/icons-material/';
 import { useSession } from 'next-auth/react';
 import graphqlClient from '@/service/graphqlClient';
-import { CREATE_ARTICLE } from '@/gql/article';
+import { CREATE_ARTICLE, UPDATE_ARTICLE } from '@/gql/article';
+import { UpdateArticleFilter } from '@/gql/types';
+import { ArticleAction } from '@/enum/article.enum';
 
 interface IArticleFormInput {
   title: string;
@@ -22,20 +24,45 @@ interface IArticleFormInput {
   published: boolean;
 }
 
-export default function ArticleForm() {
+type IArticleFormProps = ICreateArticleFormProps | IUpdateArticleFormProps;
+
+interface ICreateArticleFormProps {
+  type: ArticleAction.CREATE;
+}
+
+interface IUpdateArticleFormProps {
+  type: ArticleAction.UPDATE;
+  defaultValues: IArticleFormInput;
+  filter: UpdateArticleFilter;
+}
+
+export default function ArticleForm(props: IArticleFormProps) {
   const { data: session } = useSession();
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<IArticleFormInput>();
+  } = useForm<IArticleFormInput>({
+    defaultValues:
+      props.type === ArticleAction.UPDATE ? props.defaultValues : {},
+  });
   const router = useRouter();
   const [requestErrors, setRequestErrors] = React.useState<string[]>([]);
   const onSubmit: SubmitHandler<IArticleFormInput> = async (data) => {
     const client = graphqlClient(session?.accessToken);
-    await client.request(CREATE_ARTICLE, {
-      input: data,
-    });
+    switch (props.type) {
+      case ArticleAction.CREATE:
+        await client.request(CREATE_ARTICLE, {
+          input: data,
+        });
+        break;
+      case ArticleAction.UPDATE:
+        await client.request(UPDATE_ARTICLE, {
+          filter: props.filter,
+          input: data,
+        });
+        break;
+    }
     router.push('/');
   };
 
@@ -86,7 +113,16 @@ export default function ArticleForm() {
         <FormGroup>
           <FormControlLabel
             label="Published"
-            control={<Checkbox defaultChecked {...register('published')} />}
+            control={
+              <Checkbox
+                defaultChecked={
+                  props.type === ArticleAction.UPDATE
+                    ? props.defaultValues.published
+                    : true
+                }
+                {...register('published')}
+              />
+            }
           />
         </FormGroup>
         {requestErrors.map((error, i) => (
@@ -101,7 +137,7 @@ export default function ArticleForm() {
           variant="contained"
           size="large"
           sx={{ minWidth: 200, mt: 2 }}
-          label={isSubmitting ? 'In progress…' : 'Add Article'}
+          label={isSubmitting ? 'In progress…' : 'Update'}
           disabled={isSubmitting}
         />
       </Box>

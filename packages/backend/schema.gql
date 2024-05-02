@@ -3,6 +3,9 @@
 # ------------------------------------------------------
 
 type User {
+  """The id of the User"""
+  id: ID!
+
   """The email of User"""
   email: String!
 

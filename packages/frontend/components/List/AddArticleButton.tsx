@@ -10,7 +10,7 @@ export default function AddArticleButton() {
       variant="contained"
       size="large"
       component="a"
-      href="/profile/add-article"
+      href="/article/add"
       sx={{ minWidth: 200 }}
       label="Add Article"
     />

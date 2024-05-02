@@ -137,7 +137,7 @@ export default function ArticleForm(props: IArticleFormProps) {
           variant="contained"
           size="large"
           sx={{ minWidth: 200, mt: 2 }}
-          label={isSubmitting ? 'In progress…' : 'Update'}
+          label={isSubmitting ? 'In progress…' : 'Save'}
           disabled={isSubmitting}
         />
       </Box>

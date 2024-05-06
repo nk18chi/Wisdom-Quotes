@@ -21,3 +21,11 @@ export const GET_AUTHOR_ID_BY_USER_ID = gql`
     }
   }
 `;
+
+export const SIGN_UP = gql`
+  mutation CreateUser($input: CreateUserInput!) {
+    createUser(input: $input) {
+      email
+    }
+  }
+`;

@@ -50,9 +50,10 @@ export default function ArticleForm(props: IArticleFormProps) {
   const [requestErrors, setRequestErrors] = React.useState<string[]>([]);
   const onSubmit: SubmitHandler<IArticleFormInput> = async (data) => {
     const client = graphqlClient(session?.accessToken);
+    let res: any;
     switch (props.type) {
       case ArticleAction.CREATE:
-        await client.request(CREATE_ARTICLE, {
+        res = await client.request(CREATE_ARTICLE, {
           input: data,
         });
         break;
@@ -62,6 +63,10 @@ export default function ArticleForm(props: IArticleFormProps) {
           input: data,
         });
         break;
+    }
+    if (res.error) {
+      setRequestErrors([res.error]);
+      return;
     }
     router.push('/');
   };

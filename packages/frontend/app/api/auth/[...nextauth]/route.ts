@@ -15,12 +15,14 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.userId = user.id;
         token.accessToken = user.token;
+        token.authorId = user.authorId;
       }
       return token;
     },
     async session({ session, token }) {
       session.user.id = token.userId;
       session.accessToken = token.accessToken;
+      session.user.authorId = token.authorId;
       return session;
     },
   },
@@ -45,6 +47,7 @@ export const authOptions: NextAuthOptions = {
           });
           return {
             id: login.id,
+            authorId: login.authorId,
             email: credentials.email,
             name: login.name,
             token: login.token,

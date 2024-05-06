@@ -5,6 +5,7 @@ export const LOGIN = gql`
     login(input: $input) {
       email
       id
+      authorId
       name
       token
     }

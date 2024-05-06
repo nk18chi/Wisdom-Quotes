@@ -30,6 +30,7 @@ export class UserResolver {
       const user = await this.userService.login(input);
       return {
         id: user.id,
+        authorId: user.author?.id ?? null,
         name: user.author?.name ?? null,
         email: user.email,
         token: await this.userService.generateAuthenticationToken({

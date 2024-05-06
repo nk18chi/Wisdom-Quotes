@@ -79,6 +79,8 @@ export type FindArticlesFilter = {
 
 export type LoginUser = {
   __typename?: 'LoginUser';
+  /** The unique identifier of author */
+  authorId?: Maybe<Scalars['ID']['output']>;
   /** The email of User */
   email: Scalars['String']['output'];
   /** The unique identifier of user */

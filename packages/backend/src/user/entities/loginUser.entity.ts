@@ -5,6 +5,12 @@ export class LoginUser {
   @Field(() => ID, { description: 'The unique identifier of user' })
   id: string;
 
+  @Field(() => ID, {
+    description: 'The unique identifier of author',
+    nullable: true,
+  })
+  authorId?: string | null;
+
   @Field(() => String, { description: 'The name of Author', nullable: true })
   name?: string | null;
 

@@ -45,6 +45,9 @@ type LoginUser {
   """The unique identifier of user"""
   id: ID!
 
+  """The unique identifier of author"""
+  authorId: ID
+
   """The name of Author"""
   name: String
 
@@ -95,8 +98,8 @@ input FindArticlesFilter {
 }
 
 type Mutation {
-  createAuthor(input: CreateAuthorInput!): Author!
-  updateAuthor(filter: UpdateAuthorFilter!, input: UpdateAuthorInput!): Author!
+  createAuthor(input: CreateAuthorResolverInput!): Author!
+  updateAuthor(input: UpdateAuthorInput!): Author!
   createUser(input: CreateUserInput!): User!
   login(input: LoginUserInput!): LoginUser!
   createArticle(input: CreateArticleInput!): Article!
@@ -104,16 +107,9 @@ type Mutation {
   removeArticle(id: String!): Article!
 }
 
-input CreateAuthorInput {
+input CreateAuthorResolverInput {
   """The name of Author"""
   name: String!
-
-  """The id of User"""
-  userId: ID!
-}
-
-input UpdateAuthorFilter {
-  id: String!
 }
 
 input UpdateAuthorInput {

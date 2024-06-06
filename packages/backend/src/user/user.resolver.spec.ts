@@ -3,6 +3,7 @@ import { UserResolver } from './user.resolver';
 import { UserService } from './user.service';
 import { PrismaService } from '../prisma/prisma.service';
 import UsersJson from '../fixture/users.json';
+import AuthorsJson from '../fixture/authors.json';
 import { ObjectId } from 'bson';
 
 const NEW_USER_MOCK = {
@@ -63,6 +64,7 @@ describe('UserResolver', () => {
         id: UsersJson[0].id,
         name: 'John Smith',
         email: UsersJson[0].email,
+        authorId: AuthorsJson[0].id,
         token: expect.any(String),
       });
     });

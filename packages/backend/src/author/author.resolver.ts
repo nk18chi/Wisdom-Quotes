@@ -3,8 +3,8 @@ import { AuthorService } from './author.service';
 import { Author } from './entities/author.entity';
 import { CreateAuthorResolverInput } from './dto/create-author.input';
 import { UpdateAuthorInput } from './dto/update-author.input';
-import { GqlUser } from 'src/decorators/gqlUser.decorator';
-import { SignedInUser } from 'src/user/entities/signedInUser.entity';
+import { GqlUser } from '../decorators/gqlUser.decorator';
+import { SignedInUser } from '../user/entities/signedInUser.entity';
 
 @Resolver(() => Author)
 export class AuthorResolver {

@@ -6,8 +6,8 @@ import { UpdateArticleInput } from './dto/update-article.input';
 import { UpdateArticleFilter } from './dto/update-article.filter';
 import { FindArticlesFilter } from './dto/find-articles.filter';
 import { GqlUser } from '../decorators/gqlUser.decorator';
-import { UserService } from 'src/user/user.service';
-import { SignedInUser } from 'src/user/entities/signedInUser.entity';
+import { UserService } from '../user/user.service';
+import { SignedInUser } from '../user/entities/signedInUser.entity';
 
 @Resolver(() => Article)
 export class ArticleResolver {
@@ -33,7 +33,7 @@ export class ArticleResolver {
   ) {
     if (!user) new Error('User not found');
     const authorUser = await this.userService.findOne(user._id);
-    if (!authorUser?.author?.id) new Error('Author not found');
+    if (!authorUser?.author?.id) throw new Error('Author not found');
     return this.articleService.create({
       ...input,
       authorId: authorUser!.author!.id,

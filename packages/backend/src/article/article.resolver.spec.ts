@@ -6,6 +6,7 @@ import AuthorJSON from '../fixture/authors.json';
 import ArticlesJson from '../fixture/articles.json';
 import UsersJson from '../fixture/users.json';
 import { ObjectId } from 'bson';
+import { UserService } from '../user/user.service';
 
 const NEW_ARTICLE_MOCK = {
   id: new ObjectId().toString(),
@@ -14,12 +15,24 @@ const NEW_ARTICLE_MOCK = {
   published: true,
 };
 
+const USER_MOCK = {
+  _id: UsersJson[0].id,
+};
+
+const AUTHOR_USER_MOCK = {
+  id: UsersJson[0].id,
+  name: 'Alice Johnson',
+  author: {
+    id: AuthorJSON[0].id,
+  },
+};
+
 describe('ArticleResolver', () => {
   let resolver: ArticleResolver;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [ArticleResolver, ArticleService, PrismaService],
+      providers: [ArticleResolver, ArticleService, PrismaService, UserService],
     }).compile();
 
     resolver = module.get<ArticleResolver>(ArticleResolver);
@@ -45,11 +58,25 @@ describe('ArticleResolver', () => {
   });
 
   describe('createArticle', () => {
+    beforeEach(() => {
+      jest
+        .spyOn(UserService.prototype, 'findOne')
+        .mockResolvedValue(AUTHOR_USER_MOCK as any);
+    });
     it('should create a new article in db', async () => {
-      const result = await resolver.createArticle(NEW_ARTICLE_MOCK);
+      const result = await resolver.createArticle(NEW_ARTICLE_MOCK, USER_MOCK);
       expect(result).toMatchObject(NEW_ARTICLE_MOCK);
       expect(result.createdAt).toBeDefined();
       expect(result.updatedAt).toBeDefined();
+    });
+    it('should throw an error when a user does not have author id yet', async () => {
+      jest.spyOn(UserService.prototype, 'findOne').mockResolvedValue({
+        ...AUTHOR_USER_MOCK,
+        author: { id: null },
+      } as any);
+      expect(
+        resolver.createArticle(NEW_ARTICLE_MOCK, USER_MOCK),
+      ).rejects.toThrow('Author not found');
     });
   });
 

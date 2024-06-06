@@ -12,6 +12,10 @@ const NEW_AUTHOR_MOCK = {
   userId: '65b5fdb1a5ab620c89715ffc',
 };
 
+const USER_MOCK = {
+  _id: '65b5fdb1a5ab620c89715ffc',
+};
+
 describe('AuthorResolver', () => {
   let resolver: AuthorResolver;
 
@@ -42,7 +46,7 @@ describe('AuthorResolver', () => {
 
   describe('createAuthor', () => {
     it('should create a new author in db', async () => {
-      const result = await resolver.createAuthor(NEW_AUTHOR_MOCK);
+      const result = await resolver.createAuthor(NEW_AUTHOR_MOCK, USER_MOCK);
       expect(result).toMatchObject(NEW_AUTHOR_MOCK);
       expect(result.createdAt).toBeDefined();
       expect(result.updatedAt).toBeDefined();
@@ -55,11 +59,9 @@ describe('AuthorResolver', () => {
       expect(before).toMatchObject({ name: NEW_AUTHOR_MOCK.name });
       const result = await resolver.updateAuthor(
         {
-          id: NEW_AUTHOR_MOCK.id,
-        },
-        {
           name: 'Taro Yamada',
         },
+        USER_MOCK,
       );
       expect(result).toMatchObject({ name: 'Taro Yamada' });
       expect(result.updatedAt).not.toBe(result.createdAt);

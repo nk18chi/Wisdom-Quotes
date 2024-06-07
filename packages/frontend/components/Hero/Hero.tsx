@@ -15,14 +15,13 @@ const HeroContainer = styled.div`
 
 export default function Hero() {
   const { data: session } = useSession();
-
   if (!session?.user) {
     return null;
   }
   return (
     <HeroContainer>
       <Typography color="inherit" align="center" variant="h2">
-        Welcome Back, {session?.user.name ?? 'Guest'}
+        {`Welcome Back, ${session?.user.name ?? 'Guest'}`}
       </Typography>
     </HeroContainer>
   );

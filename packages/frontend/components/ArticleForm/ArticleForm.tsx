@@ -14,7 +14,7 @@ import { useRouter } from 'next/navigation';
 import { Cancel } from '@mui/icons-material/';
 import { useSession } from 'next-auth/react';
 import graphqlClient from '@/service/graphqlClient';
-import { CREATE_ARTICLE, UPDATE_ARTICLE } from '@/gql/article';
+import { CREATE_ARTICLE, REMOVE_ARTICLE, UPDATE_ARTICLE } from '@/gql/article';
 import { UpdateArticleFilter } from '@/gql/types';
 import { ArticleAction } from '@/enum/article.enum';
 
@@ -41,35 +41,59 @@ export default function ArticleForm(props: IArticleFormProps) {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<IArticleFormInput>({
     defaultValues:
       props.type === ArticleAction.UPDATE ? props.defaultValues : {},
   });
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
   const router = useRouter();
   const [requestErrors, setRequestErrors] = React.useState<string[]>([]);
-  const onSubmit: SubmitHandler<IArticleFormInput> = async (data) => {
-    const client = graphqlClient(session?.accessToken);
-    let res: any;
-    switch (props.type) {
-      case ArticleAction.CREATE:
-        res = await client.request(CREATE_ARTICLE, {
-          input: data,
-        });
-        break;
-      case ArticleAction.UPDATE:
-        await client.request(UPDATE_ARTICLE, {
-          filter: props.filter,
-          input: data,
-        });
-        break;
-    }
-    if (res.error) {
-      setRequestErrors([res.error]);
+  const client = graphqlClient(session?.accessToken);
+  const onSubmit: SubmitHandler<IArticleFormInput> = React.useCallback(
+    async (data) => {
+      setIsSubmitting(true);
+      let res: any;
+      switch (props.type) {
+        case ArticleAction.CREATE:
+          res = await client.request(CREATE_ARTICLE, {
+            input: data,
+          });
+          break;
+        case ArticleAction.UPDATE:
+          await client.request(UPDATE_ARTICLE, {
+            filter: props.filter,
+            input: data,
+          });
+          break;
+      }
+      if (res?.error) {
+        setRequestErrors([res.error]);
+        setIsSubmitting(false);
+        return;
+      }
+      router.push('/');
+      setIsSubmitting(false);
+    },
+    [props, client, router, setRequestErrors],
+  );
+
+  const onDelete = React.useCallback(async () => {
+    if (props.type !== ArticleAction.UPDATE) {
+      setRequestErrors(["Can't delete the article"]);
       return;
     }
-    router.push('/');
-  };
+    setIsSubmitting(true);
+    try {
+      await client.request(REMOVE_ARTICLE, {
+        removeArticleId: props.filter.id,
+      });
+      router.push('/');
+    } catch (e: any) {
+      setRequestErrors([e.message]);
+    }
+    setIsSubmitting(false);
+  }, [props, client, router, setRequestErrors]);
 
   return (
     <React.Fragment>
@@ -136,15 +160,27 @@ export default function ArticleForm(props: IArticleFormProps) {
             {error}
           </Box>
         ))}
-        <Button
-          type="submit"
-          color="secondary"
-          variant="contained"
-          size="large"
-          sx={{ minWidth: 200, mt: 2 }}
-          label={isSubmitting ? 'In progress…' : 'Save'}
-          disabled={isSubmitting}
-        />
+        <Box component="div" className="flex justify-around">
+          <Button
+            type="button"
+            color="light"
+            variant="contained"
+            size="large"
+            sx={{ minWidth: 200, mt: 2 }}
+            label={isSubmitting ? 'In progress…' : 'Delete'}
+            disabled={isSubmitting}
+            onClick={onDelete}
+          />
+          <Button
+            type="submit"
+            color="secondary"
+            variant="contained"
+            size="large"
+            sx={{ minWidth: 200, mt: 2 }}
+            label={isSubmitting ? 'In progress…' : 'Save'}
+            disabled={isSubmitting}
+          />
+        </Box>
       </Box>
     </React.Fragment>
   );

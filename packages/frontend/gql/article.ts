@@ -52,3 +52,11 @@ export const UPDATE_ARTICLE = gql`
     }
   }
 `;
+
+export const REMOVE_ARTICLE = gql`
+  mutation RemoveArticle($removeArticleId: String!) {
+    removeArticle(id: $removeArticleId) {
+      id
+    }
+  }
+`;

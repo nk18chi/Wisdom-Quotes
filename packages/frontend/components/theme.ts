@@ -27,6 +27,11 @@ const rawTheme = createTheme({
       main: green[500],
       dark: green[700],
     },
+    light: {
+      light: grey[50],
+      main: grey[400],
+      dark: grey[700],
+    },
   },
   typography: {
     fontFamily: 'unset',

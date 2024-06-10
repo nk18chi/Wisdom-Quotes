@@ -1,5 +1,7 @@
 # Lerna-MERN-Stack-BoilerPlate
 
+https://github.com/nk18chi/lerna-mern-stack-boilerplate/assets/42604585/b4bbc605-a1fe-4464-acf1-40a9c668b232
+
 ## Requirements
 
 Node: v20.10.0
@@ -7,7 +9,6 @@ Node: v20.10.0
 ## Tech Stack
 
 - Typescript
-- Docker
 - Github Actions
 - Lerna
 

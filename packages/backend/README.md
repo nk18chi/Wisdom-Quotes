@@ -7,6 +7,11 @@ npx prisma db push
 nest g resource user
 ```
 
+```
+if you want to see query log
+export DEBUG="prisma*"
+```
+
 ## Note
 
 ### Use local MongoDB

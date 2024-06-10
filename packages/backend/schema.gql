@@ -1,0 +1,160 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  """The id of the User"""
+  id: ID!
+
+  """The email of User"""
+  email: String!
+
+  """The author of User"""
+  author: Author
+
+  """The creation date of the User"""
+  createdAt: DateTime!
+
+  """The updated date of the User"""
+  updatedAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Author {
+  """The unique identifier of Author"""
+  id: ID!
+
+  """The name of Author"""
+  name: String!
+
+  """The user info of Author"""
+  user: User!
+
+  """The creation date of the article"""
+  createdAt: DateTime!
+
+  """The updated date of the article"""
+  updatedAt: DateTime!
+}
+
+type LoginUser {
+  """The unique identifier of user"""
+  id: ID!
+
+  """The unique identifier of author"""
+  authorId: ID
+
+  """The name of Author"""
+  name: String
+
+  """The email of User"""
+  email: String!
+
+  """The token of User"""
+  token: String!
+}
+
+type Article {
+  """The id of the article"""
+  id: ID!
+
+  """The title of the article"""
+  title: String!
+
+  """The content of the article"""
+  content: String!
+
+  """The flag to publish the article"""
+  published: Boolean!
+
+  """The author of the article"""
+  author: Author!
+
+  """The creation date of the article"""
+  createdAt: DateTime!
+
+  """The updated date of the article"""
+  updatedAt: DateTime!
+}
+
+type Query {
+  author(id: String!): Author!
+  user(id: String!): User!
+  users: [User!]!
+  articles(filter: FindArticlesFilter!): [Article!]!
+  article(id: String!): Article!
+}
+
+input FindArticlesFilter {
+  """Filter by published status"""
+  published: Boolean
+
+  """The id of the author"""
+  authorId: ID
+}
+
+type Mutation {
+  createAuthor(input: CreateAuthorResolverInput!): Author!
+  updateAuthor(input: UpdateAuthorInput!): Author!
+  createUser(input: CreateUserInput!): User!
+  login(input: LoginUserInput!): LoginUser!
+  createArticle(input: CreateArticleInput!): Article!
+  updateArticle(filter: UpdateArticleFilter!, input: UpdateArticleInput!): Article!
+  removeArticle(id: String!): Article!
+}
+
+input CreateAuthorResolverInput {
+  """The name of Author"""
+  name: String!
+}
+
+input UpdateAuthorInput {
+  name: String!
+}
+
+input CreateUserInput {
+  """The email of User"""
+  email: String!
+
+  """The password of User"""
+  password: String!
+}
+
+input LoginUserInput {
+  """The email of User"""
+  email: String!
+
+  """The password of User"""
+  password: String!
+}
+
+input CreateArticleInput {
+  """The title of the article"""
+  title: String!
+
+  """The content of the article"""
+  content: String!
+
+  """The flag to publish the article"""
+  published: Boolean!
+}
+
+input UpdateArticleFilter {
+  """The id of the article"""
+  id: ID!
+}
+
+input UpdateArticleInput {
+  """The title of the article"""
+  title: String
+
+  """The content of the article"""
+  content: String
+
+  """The flag to publish the article"""
+  published: Boolean
+}

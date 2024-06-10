@@ -1,0 +1,22 @@
+{
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json",
+  "ignoreChanges": [
+    "**/CHANGELOG.md",
+    "**/node_modules/**",
+    "**/package.json",
+    "**/*.md",
+    "**/*.test.*",
+    "**/*.stories.*"
+  ],
+  "packages": [
+    "packages/*"
+  ],
+  "version": "independent",
+  "command": {
+    "version": {
+      "conventionalCommits": true,
+      "yes": true,
+      "message": "chore(package): bump the package version"
+    }
+  }
+}

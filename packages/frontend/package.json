@@ -1,0 +1,60 @@
+{
+  "name": "@nk18chi/frontend",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "format": "prettier . --write",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "vitest run",
+    "test:watch": "vitest watch",
+    "test:e2e": "playwright test",
+    "codegen": "graphql-codegen --config codegen.yml"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@fontsource/roboto": "^5.0.8",
+    "@mui/icons-material": "^5.15.10",
+    "@mui/material": "^5.15.10",
+    "@nk18chi/backend": "^0.0.1",
+    "@nk18chi/components": "^0.0.1",
+    "@types/lodash": "^4.14.202",
+    "graphql": "^16.8.1",
+    "graphql-request": "^6.1.0",
+    "history": "^5.3.0",
+    "lodash": "^4.17.21",
+    "luxon": "^3.4.4",
+    "next": "14.0.4",
+    "next-auth": "^4.24.7",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-hook-form": "^7.50.1",
+    "swr": "^2.2.5"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.2",
+    "@playwright/test": "^1.41.0",
+    "@testing-library/react": "^14.1.2",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.4",
+    "jsdom": "^23.2.0",
+    "postcss": "^8",
+    "prettier": "3.2.4",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5",
+    "vitest": "^1.2.1"
+  },
+  "repository": {
+    "url": "https://github.com/nk18chi/lerna-playground.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  }
+}
